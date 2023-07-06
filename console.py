@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
         pass  # Ne fait rien pour ignorer une ligne vide
 
     def do_create(self, arg):
-        args = shlex.split(arg)
+        args = arg.split()
         if not args:
             print("** Class name missing **")
             return
@@ -63,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
         print(instance.id)
 
     def do_show(self, arg):
-        args = shlex.split(arg)
+        args = arg.split()
         if not args:
             print("** Class name missing **")
             return
@@ -102,13 +102,14 @@ class HBNBCommand(cmd.Cmd):
             models.storage.save()
         else:
             print("** no instance found **")
-
+    
     def do_update(self, arg):
             """
             Updates an instance based on the class name and id
             by adding or updating an attribute.
             """
-            args = shlex.split(arg)
+            args = arg.split()  
+
             if not args:
                 print("** class name missing **")
             elif args[0] not in self.classed:
@@ -126,7 +127,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     instance = models.storage.all()[key]
                     attr_name = args[2]
-                    attr_value = args[3]
+                    attr_value = args[3].strip("\"")
                     setattr(instance, attr_name, attr_value)
                     instance.save()
 
