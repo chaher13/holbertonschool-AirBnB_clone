@@ -63,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
         print(instance.id)
 
     def do_show(self, arg):
-        args = arg.split()
+        args = shlex.split(arg)
         if not args:
             print("** Class name missing **")
             return
@@ -104,27 +104,31 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_update(self, arg):
-        args = arg.split()
-        if not args:
-            print("** Class name missing **")
-            return
-
-        if args[0] not in self.classed:
-            print("** Class doesn't exist **")
-            return
-
-        if len(args) < 3:
-            print("** Instance ID or attribute name missing **")
-            return
-
-        storeq = args[0] + "." + args[1]
-        objects = models.storage.all()
-        attribute_name = args[2]
-        attribute_value = args[3]
-        obj = objects[storeq]
-
-        setattr(obj, attribute_name, attribute_value)
-        obj.save()
+            """
+            Updates an instance based on the class name and id
+            by adding or updating an attribute.
+            """
+            args = shlex.split(arg)
+            if not args:
+                print("** class name missing **")
+            elif args[0] not in self.classed:
+                print("** class doesn't exist **")
+            elif len(args) == 1:
+                print("** instance id missing **")
+            elif len(args) == 2:
+                print("** attribute name missing **")
+            elif len(args) == 3:
+                print("** value missing **")
+            else:
+                key = args[0] + '.' + args[1]
+                if key not in models.storage.all():
+                    print('no instance found')
+                else:
+                    instance = models.storage.all()[key]
+                    attr_name = args[2]
+                    attr_value = args[3]
+                    setattr(instance, attr_name, attr_value)
+                    instance.save()
 
     def do_all(self, arg):
         objects = models.storage.all()
@@ -148,26 +152,6 @@ class HBNBCommand(cmd.Cmd):
                          if isinstance(obj, self.classed[class_name])]
         print(filtered_objs)
 
-    def do_update(self, arg):
-        """Update an instance"""
-        args = shlex.split(arg)
-        if not args:
-            print("** Class name missing **")
-            return
-        if args[0] not in self.classed:
-            print("** Class doesn't exist **")
-            return
-        if len(args) < 3:
-            print("** Instance ID or attribute name missing **")
-            return
-        storeq = args[0] + "."  + args[1]          
-        objects = models.storage.all()
-        attribute_name = args[2]
-        attribute_value = args[3]
-        obj = objects[storeq] 
-        
-        setattr(obj, attribute_name, attribute_value)
-        obj.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
