@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
         pass  # Ne fait rien pour ignorer une ligne vide
 
     def do_create(self, arg):
-        args = arg.split()
+        args = shlex.split(arg)
         if not args:
             print("** Class name missing **")
             return
@@ -83,7 +83,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_destroy(self, arg):
-        args = arg.split()
+        args = shlex.split(arg)
         if not args:
             print("** Class name missing **")
             return
