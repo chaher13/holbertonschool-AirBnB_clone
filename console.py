@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+class hbnb
+"""
+
 import cmd
 from typing import IO
 from models.base_model import BaseModel
@@ -170,3 +174,4 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
+
