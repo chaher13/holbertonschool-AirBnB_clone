@@ -143,9 +143,6 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        if class_name != "User":
-            print("** class doesn't exist **")
-            return
 
         filtered_objs = [str(obj) for obj in objects.values()
                          if isinstance(obj, self.classed[class_name])]
@@ -174,4 +171,5 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
+
 
