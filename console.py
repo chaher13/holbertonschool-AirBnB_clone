@@ -72,7 +72,7 @@ class HBNBCommand(cmd.Cmd):
             print("** Class doesn't exist **")
             return
 
-        if len(args) < 2:
+        if len(args) == 1:
             print("** Instance ID missing **")
             return
 
@@ -92,7 +92,7 @@ class HBNBCommand(cmd.Cmd):
             print("** Class doesn't exist **")
             return
 
-        if len(args) < 2:
+        if len(args) == 1:
             print("** Instance ID missing **")
             return
 
