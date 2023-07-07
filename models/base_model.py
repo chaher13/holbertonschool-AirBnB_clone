@@ -58,7 +58,7 @@ class BaseModel:
         - Adds the '__class__' key with the class name of the object.
         - Converts created_at and updated_at to string objects in ISO format.
         Returns:
-            A dictionary containing all keys/values of the instance.
+        A dictionary containing all keys/values of the instance.
         """
         data = self.__dict__.copy()
         data['__class__'] = self.__class__.__name__
