@@ -40,6 +40,9 @@
 	text-align: left;
 	margin-top:22px;
 	visibility: hidden;
+    position:relative;
+    z-index:2;
+    
 }
 
 
